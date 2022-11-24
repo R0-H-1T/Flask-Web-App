@@ -3,6 +3,27 @@
 
 
 {% block content %}
-<h1>This is the home page</h1>
+
+<h1 align="center">Notes</h1>
+
+<ul class="list-group list-group-flush" id="notes">
+    {% for note in user.notes %}  <!-- notes column name in db -->
+        <li class="list-group-item">{{ note.data }} <!--  Note table -> data column name -->
+            <button type="button" class="close" onclick="deleteNote({{ note.id }})"> <!-- JS will send the delete request to the backend -->
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>   
+
+    {% endfor %}
+
+</ul>
+
+<form  method="POST">
+    <textarea name="note" id="note" class="form-control"></textarea>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+</form>
 
 {% endblock %}
